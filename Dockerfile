@@ -62,6 +62,11 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
+# sudo for the ubuntu user with the password from SUDO_PASSWORD_HASH (checked at runtime by a PAM helper, see sudo/)
+COPY --chmod=0440 sudo/ubuntu /etc/sudoers.d/ubuntu
+COPY --chmod=0755 sudo/sudo-password-check /usr/local/sbin/sudo-password-check
+COPY --chmod=0644 sudo/pam-sudo /etc/pam.d/sudo
+
 USER ubuntu
 
 # add local files

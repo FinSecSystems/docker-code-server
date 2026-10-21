@@ -1,0 +1,8 @@
+#%PAM-1.0
+# sudo for the code-server user: the password is checked by /usr/local/sbin/sudo-password-check against SUDO_PASSWORD_HASH
+session    required   pam_limits.so
+session    required   pam_env.so readenv=1 user_readenv=0
+session    required   pam_env.so readenv=1 envfile=/etc/default/locale user_readenv=0
+auth       required   pam_exec.so expose_authtok quiet /usr/local/sbin/sudo-password-check
+@include common-account
+@include common-session-noninteractive
